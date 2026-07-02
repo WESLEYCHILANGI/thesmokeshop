@@ -1,0 +1,92 @@
+/* ============================================================
+   THE SMOKE SHOP — admin styles
+   ============================================================ */
+.admin-body{min-height:100vh}
+
+/* ---- Login ---- */
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:24px}
+.login-card{width:100%;max-width:400px;background:linear-gradient(160deg,var(--card),var(--bg-2));border:1px solid var(--line);border-radius:22px;padding:2.6rem 2rem;box-shadow:0 30px 80px rgba(0,0,0,.6);text-align:center}
+.login-card .logo{height:78px;margin:0 auto 1rem}
+.login-card h1{font-family:var(--display);font-size:1.5rem;letter-spacing:.5px}
+.login-card p.sub{color:var(--muted);font-size:.9rem;margin:.5rem 0 1.8rem}
+.login-card label{display:block;text-align:left;font-size:.82rem;color:var(--muted);margin-bottom:.4rem}
+.login-card input{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:.8rem .9rem;font-family:var(--font);outline:none;transition:.2s;margin-bottom:1.1rem}
+.login-card input:focus{border-color:var(--blue);box-shadow:var(--glow-blue)}
+.login-err{color:var(--red-bright);font-size:.82rem;margin-bottom:1rem;min-height:1em}
+.login-note{font-size:.72rem;color:var(--muted);margin-top:1.4rem;line-height:1.5}
+.login-back{display:inline-block;margin-top:1rem;color:var(--muted);font-size:.85rem}
+.login-back:hover{color:var(--blue-bright)}
+
+/* ---- Dashboard shell ---- */
+.dash-header{position:sticky;top:0;z-index:30;background:rgba(7,7,12,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.dash-nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.dash-brand{display:flex;align-items:center;gap:.6rem}
+.dash-brand .logo{height:38px}
+.dash-brand b{font-family:var(--display);letter-spacing:1px;font-size:.95rem}
+.dash-brand small{display:block;color:var(--muted);font-size:.6rem;letter-spacing:2px}
+.dash-actions{display:flex;align-items:center;gap:.6rem}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:1.5rem 0 2rem;overflow-x:auto}
+.tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);padding:.7rem 1rem;font-family:var(--font);font-size:.92rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:.2s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text);border-bottom-color:var(--blue)}
+.panel{display:none;animation:fade .3s ease}
+.panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---- KPI cards ---- */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.1rem;margin-bottom:2rem}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem}
+.kpi .k-label{color:var(--muted);font-size:.78rem;letter-spacing:1px;text-transform:uppercase}
+.kpi .k-val{font-family:var(--display);font-size:1.7rem;margin-top:.4rem;line-height:1}
+.kpi .k-sub{font-size:.78rem;color:var(--muted);margin-top:.5rem}
+.kpi.accent{background:linear-gradient(150deg,rgba(30,155,255,.14),rgba(255,45,85,.1))}
+.k-val.good{color:#37d66f}
+.k-val.warn{color:#ffcf5c}
+.k-val.bad{color:var(--red-bright)}
+
+/* ---- charts ---- */
+.chart-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:1.4rem;margin-bottom:2rem}
+.card-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:1.3rem}
+.card-box h3{font-size:1rem;margin-bottom:1rem;font-family:var(--display);letter-spacing:.5px}
+.chart-holder{position:relative;height:260px}
+.empty-state{color:var(--muted);text-align:center;padding:2.5rem 1rem;font-size:.9rem}
+
+/* ---- tables ---- */
+.table-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+table.data{width:100%;border-collapse:collapse;min-width:720px}
+table.data th,table.data td{text-align:left;padding:.8rem 1rem;border-bottom:1px solid var(--line);font-size:.88rem}
+table.data th{color:var(--muted);font-weight:600;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;position:sticky;top:0;background:var(--card-2)}
+table.data tr:last-child td{border-bottom:none}
+table.data td.num{text-align:right;font-variant-numeric:tabular-nums}
+table.data input.cell{width:90px;background:var(--bg-2);border:1px solid var(--line);border-radius:8px;color:var(--text);padding:.4rem .5rem;font-family:var(--font);text-align:right}
+table.data input.cell:focus{border-color:var(--blue);outline:none}
+.pill{display:inline-block;padding:.2rem .6rem;border-radius:50px;font-size:.72rem;font-weight:600}
+.pill.ok{background:rgba(34,197,94,.16);color:#37d66f}
+.pill.low{background:rgba(255,207,92,.16);color:#ffcf5c}
+.pill.out{background:rgba(255,45,85,.18);color:var(--red-bright)}
+.mini-thumb{width:34px;height:34px;border-radius:8px;display:inline-grid;place-items:center;vertical-align:middle;margin-right:.6rem}
+.mini-thumb svg{width:18px;height:18px}
+.row-actions{display:flex;gap:.4rem}
+.tiny-btn{background:var(--card-2);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:.35rem .6rem;font-size:.78rem;cursor:pointer;font-family:var(--font);transition:.2s}
+.tiny-btn:hover{color:var(--text);border-color:var(--blue)}
+.tiny-btn.danger:hover{color:var(--red-bright);border-color:var(--red)}
+
+/* ---- toolbar ---- */
+.toolbar{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.toolbar h2{font-family:var(--display);font-size:1.3rem;letter-spacing:.5px}
+.toolbar .right{display:flex;gap:.6rem;flex-wrap:wrap}
+
+/* ---- record sale form ---- */
+.sale-form{display:grid;grid-template-columns:2fr 1fr auto;gap:.7rem;align-items:end;margin-bottom:1.4rem}
+.sale-form label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.35rem}
+.sale-form select,.sale-form input{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:.7rem .8rem;font-family:var(--font)}
+.settings-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.settings-row:last-child{border-bottom:none}
+.settings-row .s-desc{color:var(--muted);font-size:.85rem;max-width:520px}
+.banner{background:linear-gradient(135deg,rgba(255,207,92,.14),rgba(255,45,85,.1));border:1px solid rgba(255,207,92,.3);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:1.5rem;font-size:.88rem;color:#ffd97a;display:flex;gap:.6rem;align-items:center}
+.disclaimer-box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;color:var(--muted);font-size:.82rem;line-height:1.6;margin-top:1.5rem}
+
+@media(max-width:760px){
+  .chart-grid{grid-template-columns:1fr}
+  .sale-form{grid-template-columns:1fr}
+}

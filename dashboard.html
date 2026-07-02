@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — The Smoke Shop</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+<div class="bg-orbs"><span class="o1"></span><span class="o2"></span><span class="o3"></span></div>
+
+<!-- HEADER -->
+<header class="dash-header">
+  <div class="container dash-nav">
+    <div class="dash-brand">
+      <img src="logo.svg" alt="" class="logo">
+      <div><b>ADMIN</b><small>THE SMOKE SHOP</small></div>
+    </div>
+    <div class="dash-actions">
+      <a href="index.html" target="_blank" class="btn btn-ghost" style="padding:.55rem 1rem">View Store ↗</a>
+      <button class="btn btn-red" style="padding:.55rem 1rem" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+</header>
+
+<main class="container" style="padding-top:1.5rem;padding-bottom:3rem">
+  <div class="banner" id="passBanner" style="display:none">
+    ⚠️ You're using the default passcode. Set your own in <b>Settings</b> to keep this area private.
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-tab="overview">📊 Overview</button>
+    <button class="tab" data-tab="catalog">📦 Catalog</button>
+    <button class="tab" data-tab="inventory">📈 Stock &amp; Margins</button>
+    <button class="tab" data-tab="sales">🧾 Sales</button>
+    <button class="tab" data-tab="settings">⚙️ Settings</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="tab-overview">
+    <div class="kpi-grid" id="kpiGrid"></div>
+    <div class="chart-grid">
+      <div class="card-box">
+        <h3>Revenue — last 14 days</h3>
+        <div class="chart-holder"><canvas id="revChart"></canvas><div class="empty-state" id="revEmpty" style="display:none">No sales recorded yet. Record a sale in the <b>Sales</b> tab, or a store checkout will appear here.</div></div>
+      </div>
+      <div class="card-box">
+        <h3>Units by category</h3>
+        <div class="chart-holder"><canvas id="catChart"></canvas><div class="empty-state" id="catEmpty" style="display:none">No sales yet.</div></div>
+      </div>
+    </div>
+    <div class="card-box">
+      <h3>Top products</h3>
+      <div id="topProducts"></div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="panel" id="tab-catalog">
+    <div class="toolbar">
+      <h2>Product Catalog</h2>
+      <div class="right">
+        <button class="btn btn-ghost" style="padding:.55rem 1rem" id="addProductBtn">+ Add product</button>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:.86rem;margin-bottom:1rem">Edit price, cost and stock inline — changes save instantly and reflect on the store (in this browser).</p>
+    <div class="table-wrap">
+      <table class="data" id="catalogTable"></table>
+    </div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section class="panel" id="tab-inventory">
+    <div class="toolbar"><h2>Stock &amp; Margins</h2></div>
+    <div class="kpi-grid" id="invKpis"></div>
+    <div class="table-wrap">
+      <table class="data" id="invTable"></table>
+    </div>
+  </section>
+
+  <!-- SALES -->
+  <section class="panel" id="tab-sales">
+    <div class="toolbar"><h2>Record &amp; Track Sales</h2></div>
+    <div class="card-box" style="margin-bottom:1.6rem">
+      <h3>Log a sale (walk-in / manual)</h3>
+      <div class="sale-form">
+        <div><label>Product</label><select id="saleProduct"></select></div>
+        <div><label>Quantity</label><input type="number" id="saleQty" min="1" value="1"></div>
+        <div><button class="btn btn-primary" id="recordSaleBtn" style="height:44px">Record sale</button></div>
+      </div>
+      <p style="color:var(--muted);font-size:.8rem">Recording a sale decrements stock and updates analytics.</p>
+    </div>
+    <div class="toolbar"><h2 style="font-size:1.05rem">Recent sales</h2>
+      <div class="right"><button class="tiny-btn" id="exportBtn">Export JSON</button></div>
+    </div>
+    <div class="table-wrap"><table class="data" id="salesTable"></table></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="panel" id="tab-settings">
+    <div class="toolbar"><h2>Settings</h2></div>
+    <div class="card-box">
+      <div class="settings-row">
+        <div><h3 style="font-family:var(--font);font-size:1rem;margin-bottom:.3rem">Change passcode</h3>
+          <div class="s-desc">Set a private passcode for this admin area.</div></div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <input type="password" id="newPass" placeholder="New passcode" style="background:var(--bg-2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:.6rem .8rem;font-family:var(--font)">
+          <button class="btn btn-primary" style="padding:.55rem 1.1rem" id="savePassBtn">Save</button>
+        </div>
+      </div>
+      <div class="settings-row">
+        <div><h3 style="font-family:var(--font);font-size:1rem;margin-bottom:.3rem">Reset sales data</h3>
+          <div class="s-desc">Clear all recorded sales (keeps your catalog &amp; stock).</div></div>
+        <button class="btn btn-ghost" style="padding:.55rem 1.1rem" id="resetSalesBtn">Reset sales</button>
+      </div>
+      <div class="settings-row">
+        <div><h3 style="font-family:var(--font);font-size:1rem;margin-bottom:.3rem">Reset everything</h3>
+          <div class="s-desc">Restore the catalog to defaults and clear all sales.</div></div>
+        <button class="btn btn-red" style="padding:.55rem 1.1rem" id="resetAllBtn">Reset all</button>
+      </div>
+    </div>
+    <div class="disclaimer-box">
+      <b>How this works:</b> This admin area runs entirely in your browser using local storage — perfect for managing your own device, free, and always on. Because it's a static site, the login is a convenience gate (not encrypted server auth) and data isn't shared across devices or with customers automatically. When you're ready, this can be upgraded to a secure backend (e.g. Supabase) for real multi-device logins and live sales sync.
+    </div>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="products.js"></script>
+<script src="store.js"></script>
+<script>
+/* ---- guard ---- */
+if(!requireAuth("admin.html")){ /* redirected */ }
+ensureCatalog();
+
+const K = (typeof CONFIG!=="undefined" && CONFIG.currency) ? CONFIG.currency : "K";
+const money = n => K + Math.round(Number(n)||0).toLocaleString();
+const pct = n => (n*100).toFixed(1) + "%";
+let charts = {};
+
+/* ---- tabs ---- */
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  document.getElementById("tab-"+t.dataset.tab).classList.add("active");
+  if(t.dataset.tab==="overview") renderOverview();
+}));
+
+/* ---- OVERVIEW ---- */
+function renderOverview(){
+  const a=analytics();
+  document.getElementById("kpiGrid").innerHTML = `
+    ${kpi("Revenue", money(a.revenue), a.orders+" orders", "accent")}
+    ${kpi("Gross profit", money(a.profit), "Margin "+pct(a.marginPct), "", a.profit>0?"good":"")}
+    ${kpi("Avg order value", money(a.aov), a.units+" units sold")}
+    ${kpi("Inventory value", money(a.invValue), "at cost")}
+    ${kpi("Potential margin", money(a.potentialMargin), "if all stock sells")}
+    ${kpi("Low stock", a.lowStock.length, a.outStock.length+" out of stock", "", a.lowStock.length?"warn":"good")}
+  `;
+  drawRevChart(); drawCatChart(); renderTop();
+}
+function kpi(label,val,sub,cls,valcls){
+  return `<div class="kpi ${cls||""}"><div class="k-label">${label}</div>
+    <div class="k-val ${valcls||""}">${val}</div><div class="k-sub">${sub||""}</div></div>`;
+}
+function drawRevChart(){
+  const {labels,data}=revenueByDay(14);
+  const has=data.some(v=>v>0);
+  document.getElementById("revEmpty").style.display=has?"none":"block";
+  const cv=document.getElementById("revChart"); cv.style.display=has?"block":"none";
+  if(charts.rev) charts.rev.destroy();
+  if(!has) return;
+  charts.rev=new Chart(cv,{type:"line",data:{labels,datasets:[{label:"Revenue",data,
+    borderColor:"#37c6ff",backgroundColor:"rgba(55,198,255,.15)",fill:true,tension:.35,pointRadius:3}]},
+    options:baseOpts(true)});
+}
+function drawCatChart(){
+  const {labels,data}=salesByCategory();
+  const has=data.length>0;
+  document.getElementById("catEmpty").style.display=has?"none":"block";
+  const cv=document.getElementById("catChart"); cv.style.display=has?"block":"none";
+  if(charts.cat) charts.cat.destroy();
+  if(!has) return;
+  charts.cat=new Chart(cv,{type:"doughnut",data:{labels,datasets:[{data,
+    backgroundColor:["#1e9bff","#ff2d55","#7a3cff","#12c2b4","#ff8a3c","#ffcf5c","#37d66f"],borderWidth:0}]},
+    options:{plugins:{legend:{labels:{color:"#9aa0b5",font:{size:11}}}},maintainAspectRatio:false}});
+}
+function baseOpts(currency){
+  return {maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{ticks:{color:"#9aa0b5",font:{size:10}},grid:{color:"rgba(255,255,255,.05)"}},
+    y:{ticks:{color:"#9aa0b5",font:{size:10},callback:v=>(currency?K:"")+v},grid:{color:"rgba(255,255,255,.05)"},beginAtZero:true}}};
+}
+function renderTop(){
+  const rows=topProducts(5);
+  const el=document.getElementById("topProducts");
+  if(!rows.length){ el.innerHTML=`<div class="empty-state">No sales yet — top sellers will appear here.</div>`; return; }
+  el.innerHTML=`<table class="data"><thead><tr><th>Product</th><th class="num">Units</th><th class="num">Revenue</th></tr></thead><tbody>${
+    rows.map(r=>`<tr><td>${r.name}</td><td class="num">${r.units}</td><td class="num">${money(r.revenue)}</td></tr>`).join("")}</tbody></table>`;
+}
+
+/* ---- CATALOG ---- */
+function iconFor(p){ return `<span class="mini-thumb" style="background:${GRADS[p.grad]||GRADS.blue}">${ICONS[p.icon]||ICONS.vape}</span>`; }
+function renderCatalog(){
+  const cat=getCatalog();
+  const t=document.getElementById("catalogTable");
+  t.innerHTML=`<thead><tr><th>Product</th><th>Category</th><th class="num">Cost</th><th class="num">Price</th><th class="num">Stock</th><th></th></tr></thead>
+  <tbody>${cat.map(p=>`<tr data-id="${p.id}">
+    <td>${iconFor(p)}${p.name}</td>
+    <td>${(CATEGORIES.find(c=>c.id===p.cat)||{}).name||p.cat}</td>
+    <td class="num"><input class="cell" type="number" min="0" value="${p.cost||0}" data-field="cost"></td>
+    <td class="num"><input class="cell" type="number" min="0" value="${p.price||0}" data-field="price"></td>
+    <td class="num"><input class="cell" type="number" min="0" value="${p.stock||0}" data-field="stock"></td>
+    <td><div class="row-actions"><button class="tiny-btn danger" data-del="${p.id}">Delete</button></div></td>
+  </tr>`).join("")}</tbody>`;
+  t.querySelectorAll("input.cell").forEach(inp=>inp.addEventListener("change",e=>{
+    const tr=e.target.closest("tr"); const id=tr.dataset.id;
+    const field=e.target.dataset.field; const val=Math.max(0,parseInt(e.target.value)||0);
+    upsertProduct({id,[field]:val});
+    refreshAll();
+  }));
+  t.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click",e=>{
+    if(confirm("Delete this product?")){ deleteProduct(e.target.dataset.del); refreshAll(); }
+  }));
+}
+document.getElementById("addProductBtn").addEventListener("click",()=>{
+  const name=prompt("Product name?"); if(!name) return;
+  const price=parseInt(prompt("Price (K)?","100"))||0;
+  const cost=parseInt(prompt("Cost (K)?",String(Math.round(price*0.6))))||0;
+  const stock=parseInt(prompt("Starting stock?","40"))||0;
+  const id="p"+Date.now();
+  upsertProduct({id,name,price,cost,stock,cat:"accessories",icon:"grinder",grad:"blue",desc:name});
+  refreshAll(); alert("Added. You can fine-tune it in the table.");
+});
+
+/* ---- INVENTORY ---- */
+function renderInventory(){
+  const cat=getCatalog(); const a=analytics();
+  document.getElementById("invKpis").innerHTML=`
+    ${kpi("SKUs", a.skuCount, "products")}
+    ${kpi("Stock at cost", money(a.invValue), "")}
+    ${kpi("Stock at retail", money(a.invRetail), "")}
+    ${kpi("Low / out", a.lowStock.length+" / "+a.outStock.length, "need restock", "", a.lowStock.length?"warn":"good")}
+  `;
+  const t=document.getElementById("invTable");
+  t.innerHTML=`<thead><tr><th>Product</th><th class="num">Cost</th><th class="num">Price</th><th class="num">Margin</th><th class="num">Margin %</th><th class="num">Stock</th><th>Status</th></tr></thead>
+  <tbody>${cat.map(p=>{
+    const m=(p.price||0)-(p.cost||0); const mp=p.price?m/p.price:0;
+    const st=(p.stock||0); const status = st===0?`<span class="pill out">Out</span>`:(st<=10?`<span class="pill low">Low</span>`:`<span class="pill ok">OK</span>`);
+    return `<tr><td>${iconFor(p)}${p.name}</td>
+      <td class="num">${money(p.cost)}</td><td class="num">${money(p.price)}</td>
+      <td class="num">${money(m)}</td><td class="num">${pct(mp)}</td>
+      <td class="num">${st}</td><td>${status}</td></tr>`;
+  }).join("")}</tbody>`;
+}
+
+/* ---- SALES ---- */
+function renderSaleSelect(){
+  const sel=document.getElementById("saleProduct");
+  sel.innerHTML=getCatalog().map(p=>`<option value="${p.id}">${p.name} — ${money(p.price)} (${p.stock||0} in stock)</option>`).join("");
+}
+document.getElementById("recordSaleBtn").addEventListener("click",()=>{
+  const id=document.getElementById("saleProduct").value;
+  const qty=Math.max(1,parseInt(document.getElementById("saleQty").value)||1);
+  const s=recordSale([{id,qty}],"in-store");
+  if(s){ refreshAll(); alert("Sale recorded: "+money(s.total)); }
+});
+function renderSales(){
+  const sales=getSales().slice().reverse();
+  const t=document.getElementById("salesTable");
+  if(!sales.length){ t.innerHTML=`<tbody><tr><td class="empty-state" style="text-align:center">No sales recorded yet.</td></tr></tbody>`; return; }
+  t.innerHTML=`<thead><tr><th>Date</th><th>Items</th><th>Channel</th><th class="num">Total</th><th></th></tr></thead>
+  <tbody>${sales.map(s=>`<tr>
+    <td>${new Date(s.ts).toLocaleString(undefined,{month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})}</td>
+    <td>${s.items.map(l=>l.name+" ×"+l.qty).join(", ")}</td>
+    <td><span class="pill ${s.channel==='online'?'ok':'low'}">${s.channel}</span></td>
+    <td class="num">${money(s.total)}</td>
+    <td><button class="tiny-btn danger" data-delsale="${s.id}">Undo</button></td>
+  </tr>`).join("")}</tbody>`;
+  t.querySelectorAll("[data-delsale]").forEach(b=>b.addEventListener("click",e=>{
+    if(confirm("Undo this sale? Stock will be restored.")){ deleteSale(e.target.dataset.delsale); refreshAll(); }
+  }));
+}
+document.getElementById("exportBtn").addEventListener("click",()=>{
+  const blob=new Blob([exportData()],{type:"application/json"});
+  const url=URL.createObjectURL(blob); const a=document.createElement("a");
+  a.href=url; a.download="smokeshop-data.json"; a.click(); URL.revokeObjectURL(url);
+});
+
+/* ---- SETTINGS ---- */
+document.getElementById("savePassBtn").addEventListener("click",()=>{
+  const v=document.getElementById("newPass").value.trim();
+  if(v.length<4){ alert("Passcode must be at least 4 characters."); return; }
+  setPass(v); document.getElementById("newPass").value=""; checkBanner();
+  alert("Passcode updated.");
+});
+document.getElementById("resetSalesBtn").addEventListener("click",()=>{
+  if(confirm("Clear all sales data?")){ resetSales(); refreshAll(); }
+});
+document.getElementById("resetAllBtn").addEventListener("click",()=>{
+  if(confirm("Reset catalog to defaults and clear all sales?")){ resetAll(); ensureCatalog(); refreshAll(); }
+});
+document.getElementById("logoutBtn").addEventListener("click",()=>{ adminLogout(); window.location.href="admin.html"; });
+
+function checkBanner(){ document.getElementById("passBanner").style.display = usingDefaultPass()?"flex":"none"; }
+
+/* ---- refresh everything ---- */
+function refreshAll(){ renderOverview(); renderCatalog(); renderInventory(); renderSaleSelect(); renderSales(); }
+checkBanner();
+refreshAll();
+</script>
+</body>
+</html>

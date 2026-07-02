@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — The Smoke Shop</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+<div class="bg-orbs"><span class="o1"></span><span class="o2"></span><span class="o3"></span></div>
+
+<div class="login-wrap">
+  <form class="login-card" id="loginForm" autocomplete="off">
+    <img src="logo.svg" alt="The Smoke Shop" class="logo">
+    <h1>Admin Portal</h1>
+    <p class="sub">Sign in to manage products, stock &amp; sales.</p>
+    <label for="pass">Passcode</label>
+    <input type="password" id="pass" name="pass" placeholder="Enter passcode" autofocus>
+    <div class="login-err" id="err"></div>
+    <button type="submit" class="btn btn-primary btn-block btn-lg">Sign In</button>
+    <p class="login-note">Front-end access gate for a static site — not bank-grade security. Default passcode is <b>admin1234</b>; change it in Settings after signing in.</p>
+    <a href="index.html" class="login-back">← Back to store</a>
+  </form>
+</div>
+
+<script src="products.js"></script>
+<script src="store.js"></script>
+<script>
+  // if already signed in, go straight to dashboard
+  if(isLoggedIn()) window.location.href="dashboard.html";
+  const form=document.getElementById("loginForm");
+  const err=document.getElementById("err");
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    const val=document.getElementById("pass").value;
+    if(adminLogin(val)){
+      ensureCatalog();
+      window.location.href="dashboard.html";
+    } else {
+      err.textContent="Incorrect passcode. Try again.";
+      document.getElementById("pass").value="";
+      document.getElementById("pass").focus();
+    }
+  });
+</script>
+</body>
+</html>

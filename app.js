@@ -22,7 +22,8 @@ function loadCart(){
   catch(e){ return {}; }
 }
 function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
-function findProduct(id){ return PRODUCTS.find(p => p.id === id); }
+function catalog(){ return (typeof getCatalog==="function") ? getCatalog() : PRODUCTS; }
+function findProduct(id){ return catalog().find(p => p.id === id); }
 function money(n){ return CONFIG.currency + Number(n).toLocaleString(); }
 
 function cartCount(){ return Object.values(cart).reduce((a,q)=>a+q,0); }
@@ -100,7 +101,13 @@ function checkoutWhatsApp(){
   });
   msg += `\n*Total: ${money(cartTotal())}*\n\nPlease confirm availability and delivery. Thank you!`;
   const url = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  // record the order for the admin dashboard (this browser) & clear the cart
+  if(typeof recordSale==="function"){
+    recordSale(ids.map(id=>({id, qty:cart[id]})), "online");
+  }
   window.open(url, "_blank");
+  cart = {}; saveCart(); updateCartUI(); renderCartItems();
+  toast("Order sent to WhatsApp!");
 }
 
 /* ---------------- Drawer ---------------- */
@@ -167,9 +174,9 @@ function flashAdd(btn){
 function renderProducts(){
   const grid = document.getElementById("productGrid");
   if(!grid) return;
-  const list = PRODUCTS.filter(p=>{
+  const list = catalog().filter(p=>{
     const okCat = activeCat==="all" || p.cat===activeCat;
-    const okSearch = !searchTerm || (p.name+" "+p.desc).toLowerCase().includes(searchTerm);
+    const okSearch = !searchTerm || (p.name+" "+(p.desc||"")).toLowerCase().includes(searchTerm);
     return okCat && okSearch;
   });
   grid.innerHTML = list.length
@@ -224,7 +231,7 @@ function renderCategories(){
 function renderFeatured(){
   const grid = document.getElementById("featuredGrid");
   if(!grid) return;
-  const feat = PRODUCTS.filter(p=>p.tag==="hot").slice(0,4);
+  const feat = catalog().filter(p=>p.tag==="hot").slice(0,4);
   grid.innerHTML = feat.map(productCardHTML).join("");
 }
 
