@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#37c6ff"/>
+      <stop offset="1" stop-color="#1e9bff"/>
+    </linearGradient>
+    <linearGradient id="redg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5470"/>
+      <stop offset="1" stop-color="#ff2d55"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- outer badge -->
+  <circle cx="100" cy="100" r="94" fill="#07070c"/>
+  <circle cx="100" cy="100" r="94" stroke="url(#ring)" stroke-width="3.5" filter="url(#glow)"/>
+  <circle cx="100" cy="100" r="82" stroke="rgba(30,155,255,.35)" stroke-width="1"/>
+  <!-- smoke puffs -->
+  <g fill="rgba(255,255,255,.85)" filter="url(#glow)">
+    <circle cx="70" cy="52" r="8"/>
+    <circle cx="84" cy="45" r="10"/>
+    <circle cx="100" cy="42" r="11"/>
+    <circle cx="116" cy="46" r="9"/>
+    <circle cx="128" cy="54" r="7"/>
+  </g>
+  <!-- vape device -->
+  <g filter="url(#glow)">
+    <rect x="92" y="60" width="16" height="52" rx="6" fill="url(#ring)"/>
+    <rect x="95" y="66" width="10" height="30" rx="3" fill="#0a2740"/>
+    <rect x="96.5" y="56" width="7" height="8" rx="2" fill="#0f6fd6"/>
+  </g>
+  <!-- SMOKE text -->
+  <text x="100" y="140" text-anchor="middle" font-family="Orbitron, Arial, sans-serif" font-weight="800" font-size="26" letter-spacing="1" fill="#f2f4fb" filter="url(#glow)">SMOKE</text>
+  <!-- Shop script -->
+  <text x="130" y="156" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-weight="700" font-size="20" fill="url(#redg)" filter="url(#glow)">Shop</text>
+  <!-- tagline -->
+  <text x="100" y="176" text-anchor="middle" font-family="Arial, sans-serif" font-size="8.5" letter-spacing="2.5" fill="#9aa0b5">SMOKE WHAT YOU LOVE</text>
+</svg>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — The Smoke Shop | Lusaka, Zambia</title>
+<meta name="description" content="Get in touch with The Smoke Shop, Lusaka. Order on WhatsApp, DM us on Instagram, or send a message.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bg-orbs"><span class="o1"></span><span class="o2"></span><span class="o3"></span></div>
+
+<div class="age-gate" id="ageGate">
+  <div class="age-card">
+    <img src="logo.svg" alt="The Smoke Shop" class="logo">
+    <h2>Are you 18 or older?</h2>
+    <p>This website contains products intended for adults only. Please confirm your age to enter.</p>
+    <div class="age-btns">
+      <button class="btn btn-primary btn-lg" id="ageYes">Yes, I am 18+</button>
+      <button class="btn btn-ghost" id="ageNo">No, take me back</button>
+    </div>
+    <p class="fine">By entering you agree that you are of legal smoking/vaping age in your country. Products contain nicotine, which is addictive.</p>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container nav">
+    <a href="index.html" class="brand">
+      <img src="logo.svg" alt="" class="logo">
+      <span class="brand-name">THE SMOKE SHOP<small>SMOKE WHAT YOU LOVE</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="cart-btn" data-open-cart aria-label="Open cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+        <span class="cart-count">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- CONTACT -->
+<section class="pad">
+  <div class="container">
+    <div class="section-head" style="margin-bottom:2.5rem">
+      <span class="kicker">Get In Touch</span>
+      <h2>Let's Talk</h2>
+      <p>Order, ask a question, or check stock — the fastest way to reach us is WhatsApp.</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="ci-row">
+          <div class="ci-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg></div>
+          <div><h4>WhatsApp</h4><p><a href="#" data-wa>Tap to chat &amp; order instantly</a></p></div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+          <div><h4>Instagram</h4><p><a href="#" data-ig target="_blank">@thesmokeshop22</a></p></div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Location</h4><p>Lusaka, Zambia<br>Delivery countrywide</p></div>
+        </div>
+
+        <h4 style="margin:2rem 0 .6rem;font-family:var(--display);letter-spacing:.5px">Opening Hours</h4>
+        <ul class="hours-list">
+          <li><span>Monday – Friday</span><b>08:00 – 20:00</b></li>
+          <li><span>Saturday</span><b>09:00 – 21:00</b></li>
+          <li><span>Sunday</span><b>10:00 – 18:00</b></li>
+        </ul>
+      </div>
+
+      <div class="reveal">
+        <form class="contact-form" id="contactForm">
+          <h4 style="margin-bottom:1.2rem;font-family:var(--display);letter-spacing:.5px">Send a Message</h4>
+          <label for="cName">Your Name</label>
+          <input type="text" id="cName" name="name" placeholder="John Banda" required>
+          <label for="cPhone">Phone / WhatsApp</label>
+          <input type="tel" id="cPhone" name="phone" placeholder="e.g. 097X XXX XXX" required>
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" name="message" rows="4" placeholder="What can we help you with?" required></textarea>
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            Send via WhatsApp
+          </button>
+          <p class="wa-note">This opens WhatsApp with your message pre-filled.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col f-brand">
+        <a href="index.html" class="brand"><img src="logo.svg" alt="" class="logo"><span class="brand-name">THE SMOKE SHOP</span></a>
+        <p>Lusaka's one-stop shop for vapes, e-liquids, devices, cigars, shisha and accessories. Smoke what you love.</p>
+        <div class="socials">
+          <a href="#" data-ig aria-label="Instagram" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" data-wa aria-label="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="shop.html#disposables">Disposable Vapes</a>
+        <a href="shop.html#devices">Devices & Pods</a>
+        <a href="shop.html#eliquids">E-Liquids</a>
+        <a href="shop.html#shisha">Shisha / Hookah</a>
+        <a href="shop.html#accessories">Accessories</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="shop.html">Full Store</a>
+        <a href="#" data-ig target="_blank">Instagram</a>
+      </div>
+      <div class="footer-col">
+        <h4>Visit Us</h4>
+        <a href="#">Lusaka, Zambia</a>
+        <a href="#" data-wa>WhatsApp Orders</a>
+        <a href="contact.html">Opening Hours</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="disclaimer">⚠️ WARNING: These products contain nicotine. Nicotine is an addictive chemical. Not for sale to minors (under 18). Keep out of reach of children and pets.</p>
+      <p>© <span id="year"></span> The Smoke Shop, Lusaka. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="icon-btn" id="closeCart" aria-label="Close cart">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter">
+    <div class="cart-total"><span>Total</span><b id="cartTotal">K0</b></div>
+    <button class="btn btn-red btn-block btn-lg" id="checkoutBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
+      Checkout via WhatsApp
+    </button>
+    <p class="wa-note">You'll be taken to WhatsApp with your order ready to send.</p>
+  </div>
+</aside>
+
+<a href="#" class="wa-float" data-wa aria-label="WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.6.2s-.7 1-.9 1.1c-.2.2-.3.2-.6 0-.3-.2-1.2-.5-2.4-1.4-.9-.8-1.5-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5s0-.4 0-.5c-.1-.2-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3s1 2.7 1.2 2.9c.1.2 2 3.1 5 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18c-1.5 0-3-.4-4.3-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20z"/></svg>
+</a>
+
+<script src="products.js"></script>
+<script src="app.js"></script>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
